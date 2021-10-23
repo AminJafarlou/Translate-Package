@@ -1,18 +1,25 @@
 const fs = require('fs');
+// import fa from './fa.js';
 
-try {
-  const initialObject = fs.readFileSync('./fa.js', 'utf8');
-  return initialObject;
-} catch (err) {
-  console.log(err);
-}
+const initialObject = fs.readFileSync('./fa.js', 'utf8', (err, data) => {
+  if (err) {
+    console.log(err);
+    return;
+  }
+  return data;
+});
 
-const finalObject = initialObject;
-console.log(finalObject, 'XXX');
+const extractedObject = initialObject.slice(
+  initialObject.indexOf('{'),
+  initialObject.indexOf('}') + 1
+);
+console.log(extractedObject, typeof extractedObject);
 
-// fs.writeFile('./en.js', initialObject(), { flag: 'a+' }, (err) => {
-//   if (err) {
-//     console.log(err);
-//     return;
-//   }
-// });
+const finalObject = initialObject.replace('fa', 'en');
+
+fs.writeFile('./en.js', finalObject, (err) => {
+  if (err) {
+    console.log(err);
+    return;
+  }
+});

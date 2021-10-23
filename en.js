@@ -1,4 +1,4 @@
-const fa = {
+const en = {
   '20MDollarInMonth': 'ماهانه تا 2M$',
   '24H_CHANGE': 'تغییرات 24ساعته',
   '24H_HIGH': 'حداکثر 24ساعته',
