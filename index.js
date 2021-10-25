@@ -9,9 +9,10 @@ const initialObject = fs.readFileSync('./fa.js', 'utf8', (err, data) => {
   return data;
 });
 
-const extractedObjectInString = initialObject
-  .slice(initialObject.indexOf('{'), initialObject.indexOf('}') + 1)
-  .replace(/^"(.*)"$/, '$1');
+const extractedObjectInString = initialObject.slice(
+  initialObject.indexOf('{'),
+  initialObject.indexOf('}') + 1
+);
 
 const getObjectFromString = (stringToParse) => {
   if (typeof stringToParse === 'string') {
@@ -39,7 +40,7 @@ const results = {};
 Object.keys(extractedObj).forEach((key) => {
   results[key] = 'XXX';
 });
-console.log(results);
+console.log(results, typeof results);
 // const finalObject = initialObject.replace('fa', 'en');
 // fs.writeFile('./en.js', finalObject, (err) => {
 //   if (err) {
