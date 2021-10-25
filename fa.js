@@ -18,5 +18,8 @@ const fa = {
   ACTIVE_USER: 'فعالیت اخیر',
   ACTIVITIES: 'فعالیت‌ها',
   ALL: 'کل',
+  fa: 'فارسی',
   yesterday: 'دیروز',
 };
+
+// export default fa;
