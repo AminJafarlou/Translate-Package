@@ -1,50 +1,46 @@
+'use strict';
 const fs = require('fs');
-// import fa from './fa.js';
+const translate = require('translate-google');
+const extractedObj = require('./fa');
 
-const initialObject = fs.readFileSync('./fa.js', 'utf8', (err, data) => {
-  if (err) {
-    console.log(err);
-    return;
+async function app() {
+  // const isFileExisting = await fs.accessSync();
+
+  const reducer = {};
+  for (let i = 0; i < Object.keys(extractedObj).length; i += 50) {
+    const slicedObj =
+      i + 50 > Object.keys(extractedObj).length - 1
+        ? Object.entries(extractedObj)
+            .slice(i, Object.keys(extractedObj).length)
+            .reduce((obj, [key, value]) => {
+              return (obj = { ...obj, [key]: value });
+            }, {})
+        : Object.entries(extractedObj)
+            .slice(i, i + 50)
+            .reduce((obj, [key, value]) => {
+              return (obj = { ...obj, [key]: value });
+            }, {});
+
+    const result = await translate(slicedObj, { from: 'fa', to: 'en' });
+    console.log(result, i);
+    Object.assign(reducer, result);
   }
-  return data;
-});
+  console.log(reducer, 'XXX');
 
-const extractedObjectInString = initialObject.slice(
-  initialObject.indexOf('{'),
-  initialObject.indexOf('}') + 1
-);
+  fs.writeFileSync(
+    './en.js',
+    `
+    const en = ${JSON.stringify(reducer)}
 
-const getObjectFromString = (stringToParse) => {
-  if (typeof stringToParse === 'string') {
-    let currentKey = '';
-    const keyValPairArr = stringToParse
-      .replace('{', '')
-      .replace('}', '')
-      .split(':');
-    return keyValPairArr.reduce((obj, current, index, arr) => {
-      const previousKey = currentKey;
-      const arrKeyVal = current.trim().split(',');
-      currentKey = index !== arr.length - 1 ? arrKeyVal.pop().trim() : '';
-      const previousVal = arrKeyVal.join(',');
-      if (previousKey && previousVal !== '') obj[previousKey] = previousVal;
-      return obj;
-    }, {});
-  } else {
-    return stringToParse || {};
-  }
-};
+    module.exports = en;
+    `,
+    (err) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+    }
+  );
+}
 
-const extractedObj = getObjectFromString(extractedObjectInString);
-
-const results = {};
-Object.keys(extractedObj).forEach((key) => {
-  results[key] = 'XXX';
-});
-console.log(results, typeof results);
-// const finalObject = initialObject.replace('fa', 'en');
-// fs.writeFile('./en.js', finalObject, (err) => {
-//   if (err) {
-//     console.log(err);
-//     return;
-//   }
-// });
+app();
