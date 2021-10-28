@@ -1,10 +1,10 @@
 {
   "name": "translatepackage",
   "version": "1.0.0",
-  "description": "A package for translating i18 objects",
+  "description": "A package for translating i18 objects to other languages",
   "main": "index.js",
   "bin": {
-    "generate-dic": "./index.js"
+    "generate": "./index.js"
   },
   "scripts": {
     "generate": "nodemon --ignore ./en.js"

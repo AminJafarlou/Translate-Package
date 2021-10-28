@@ -37,10 +37,7 @@ async function app() {
   }
 
   // Concat previous en object with new results
-  // console.log(enObj, 'enObj');
-  // console.log(reducer, 'reducer');
   let finalResult = Object.assign(reducer, enObj);
-  console.log('finalResult', typeof finalResult);
 
   // Sorting the object before writing it in the outDir
   finalResult = Object.keys(reducer)
