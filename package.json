@@ -2,10 +2,9 @@
   "name": "translatepackage",
   "version": "1.1.1",
   "description": "A package for translating i18 objects to other languages",
-  "repository": "AminJafarlou/Translate-Package",
   "main": "index.js",
   "bin": {
-    "generate-": "./index.js"
+    "generate": "./index.js"
   },
   "keywords": [
     "internationalization",
@@ -17,8 +16,14 @@
     "react",
     "reactjs"
   ],
+  "homepage": "https://github.com/AminJafarlou/Translate-Package",
+  "bugs": "https://github.com/AminJafarlou/Translate-Package/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AminJafarlou/Translate-Package.git"
+  },
   "scripts": {
-    "generate": "nodemon --ignore ./en.js"
+    "generate": "node ./index.js"
   },
   "author": "Amin Jafarlou",
   "license": "ISC",
