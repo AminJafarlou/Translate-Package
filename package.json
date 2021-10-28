@@ -1,6 +1,6 @@
 {
   "name": "translatepackage",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A package for translating i18 objects to other languages",
   "repository": "AminJafarlou/Translate-Package",
   "main": "index.js",
