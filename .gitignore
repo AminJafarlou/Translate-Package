@@ -1,2 +1,4 @@
 .vscode
 node_modules
+test/en.js
+test/fr.js

@@ -1,11 +1,10 @@
 {
-  "name": "translatepackage",
-  "version": "1.0.0",
+  "name": "translate-package",
+  "version": "0.0.1",
   "description": "A package for translating i18 objects to other languages",
-  "repository": "AminJafarlou/Translate-Package",
   "main": "index.js",
   "bin": {
-    "generate-": "./index.js"
+    "generate": "./bin/index.js"
   },
   "keywords": [
     "internationalization",
@@ -17,15 +16,30 @@
     "react",
     "reactjs"
   ],
+  "homepage": "https://github.com/AminJafarlou/Translate-Package",
+  "bugs": "https://github.com/AminJafarlou/Translate-Package/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AminJafarlou/Translate-Package.git"
+  },
   "scripts": {
-    "generate": "nodemon --ignore ./en.js"
+    "prepare": "tsc -b",
+    "test": "yarn prepare && node ./bin/index.js && jest"
   },
   "author": "Amin Jafarlou",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^2.0.14"
+    "@types/jest": "^27.0.2",
+    "nodemon": "^2.0.14",
+    "ts-jest": "^27.0.7",
+    "typescript": "^4.4.4"
   },
   "dependencies": {
+    "@types/prettier": "^2.4.1",
+    "prettier": "^2.4.1",
     "translate-google": "^1.5.0"
+  },
+  "jest": {
+    "preset": "ts-jest"
   }
 }
