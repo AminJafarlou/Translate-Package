@@ -262,6 +262,7 @@ const fa = {
   withdrawPermission: 'مجوز برداشت',
   withinSixMonths: 'در 6 ماه اخیر',
   yesterday: 'دیروز',
+  air: 'هوا',
 };
 
 module.exports = fa;
