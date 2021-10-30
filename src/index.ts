@@ -1,4 +1,3 @@
-'use strict';
 import fs from 'fs';
 import path from 'path';
 import { format } from 'prettier';
@@ -15,30 +14,54 @@ async function generate() {
   const configString = fs.readFileSync('./localize.config.json');
   const config =
     configString && (JSON.parse(configString.toString()) as Config);
-
   if (!config) {
     console.log('localize.config.json Not found');
   }
-  const source = require(path.resolve(config.source));
 
+  const source = require(path.resolve(config.source));
   const sourceLanguage = config.source.split('/').reverse()[0].split('.')[0];
 
+  // Check to see if any oldSource exists in directory
+  const isOldSourceExisting = fs.existsSync(
+    path.resolve('./test/oldSource.js')
+  );
+  const oldSource = isOldSourceExisting
+    ? require(path.resolve('./test/oldSource.js'))
+    : {};
+  // Adding keys that have a different value compared to old source
+  const similarKeys = Object.keys(source).filter((item) =>
+    Object.keys(oldSource).includes(item)
+  );
+  const keysWithChangedValues = similarKeys.filter(
+    (item) => source[item] !== oldSource[item]
+  );
+  const keysWithChangedValuesObject = keysWithChangedValues.reduce(
+    (obj, item) => {
+      obj[item] = source[item];
+      return obj;
+    },
+    {} as Record<string, string>
+  );
+
+  // Loop the translation for every language
   config.languages.forEach(async (language) => {
     const fileName = `${language}.js`;
     const isFileExisting = fs.existsSync(path.resolve(config.out, fileName));
 
     // Deleting Keys that already exist in en.js, to prevent unnecessary API calls
-    const enObj = isFileExisting
+    const outputObject = isFileExisting
       ? require(path.resolve(config.out, fileName))
       : {};
-
     const remainingKeys = Object.keys(source).filter(
-      (key) => !Object.keys(enObj).includes(key)
+      (key) => !Object.keys(outputObject).includes(key)
     );
-    const inputObject = remainingKeys.reduce((obj, item) => {
+    let inputObject = remainingKeys.reduce((obj, item) => {
       obj[item] = source[item];
       return obj;
     }, {} as Record<string, string>);
+
+    // Adding keys whose values are changed in source to input object
+    inputObject = Object.assign(inputObject, keysWithChangedValuesObject);
 
     // Giving 50 items to translate in each API call, more than that will not work unfortunately!
     const reducer: Record<string, string> = {};
@@ -60,11 +83,12 @@ async function generate() {
         from: sourceLanguage,
         to: language,
       });
+
       Object.assign(reducer, result);
     }
 
     // Concat previous en object with new results
-    let finalResult = Object.assign(reducer, enObj);
+    let finalResult = Object.assign(outputObject, reducer);
 
     // Sorting the object before writing it in the outDir
     finalResult = Object.keys(finalResult)
@@ -80,9 +104,9 @@ async function generate() {
         `
       // This File is Auto-Generated don't change manually
 
-        const en = ${JSON.stringify(finalResult)}
+        const ${language} = ${JSON.stringify(finalResult)}
 
-        module.exports = en;
+        module.exports = ${language};
       `,
         {
           filepath: path.resolve(config.out, fileName),
@@ -90,6 +114,9 @@ async function generate() {
       )
     );
   });
+
+  // Make a copy of source file for future comparisons
+  await fs.copyFileSync(config.source, './test/oldSource.js');
 }
 
 export { generate };
