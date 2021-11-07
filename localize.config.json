@@ -1,5 +1,5 @@
 {
-  "source": "./test/fa.js",
+  "source": "./test/en.js",
   "out": "./test",
-  "languages": ["en"]
+  "languages": ["fr"]
 }

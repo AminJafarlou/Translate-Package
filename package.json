@@ -24,7 +24,7 @@
   },
   "scripts": {
     "prepare": "tsc -b",
-    "test": "yarn prepare && node ./bin/index.js && jest"
+    "test": "yarn prepare && node ./bin/index.js"
   },
   "author": "Amin Jafarlou",
   "license": "ISC",
