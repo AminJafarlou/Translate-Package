@@ -1,22 +1,24 @@
-const fa = {
-  aboutUse: 'درباره ما',
-  address: 'آدرس',
-  actions: 'عملیات',
-  all: 'کل',
-  amount: 'مبلغ',
-  buy: 'خرید',
-  changePassword: 'تغییر رمز عبور',
-  classic: 'کلاسیک',
-  confirm: 'تایید',
-  delete: 'حذف',
-  edit: 'ویرایش',
-  fee: 'کارمزد',
-  method: 'روش',
-  price: 'قیمت',
-  search: 'جستجو',
-  type: 'نوع',
-  yesterday: 'دیروز',
-  air: 'هوا',
+// This File is Auto-Generated don't change manually
+
+const en = {
+  aboutUse: 'about us',
+  actions: 'actions',
+  address: 'Address',
+  air: 'Air',
+  all: 'Total',
+  amount: 'Amount',
+  buy: 'Buy',
+  changePassword: 'change Password',
+  classic: 'Classic',
+  confirm: 'confirm',
+  delete: 'Delete',
+  edit: 'Edit',
+  fee: 'fee',
+  method: 'Method',
+  price: 'Price',
+  search: 'Search',
+  type: 'Type',
+  yesterday: 'Yesterday',
 };
 
-module.exports = fa;
+module.exports = en;

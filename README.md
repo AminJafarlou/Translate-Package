@@ -82,7 +82,7 @@ Source File (in English):
 ```js
 const en = {
   aboutUse: 'about us',
-  actions: 'the operation',
+  actions: 'actions',
   address: 'Address',
   air: 'Air',
   all: 'Total',
@@ -90,10 +90,10 @@ const en = {
   buy: 'Buy',
   changePassword: 'change Password',
   classic: 'Classic',
-  confirm: 'Confirmed',
+  confirm: 'confirm',
   delete: 'Delete',
   edit: 'Edit',
-  fee: 'Wage',
+  fee: 'fee',
   method: 'Method',
   price: 'Price',
   search: 'Search',

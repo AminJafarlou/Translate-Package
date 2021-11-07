@@ -8,6 +8,7 @@ interface Config {
   source: string;
   out: string;
   languages: ('en' | 'fr')[];
+  fileType: 'string';
 }
 
 async function generate() {
@@ -19,14 +20,15 @@ async function generate() {
   }
 
   const source = require(path.resolve(config.source));
+  // const fileType = config.source.split('/').reverse()[0].split('.')[1];
   const sourceLanguage = config.source.split('/').reverse()[0].split('.')[0];
 
   // Check to see if any oldSource exists in directory
   const isOldSourceExisting = fs.existsSync(
-    path.resolve('./test/oldSource.js')
+    path.resolve(`${config.out}/oldSource.js`)
   );
   const oldSource = isOldSourceExisting
-    ? require(path.resolve('./test/oldSource.js'))
+    ? require(path.resolve(`${config.out}/oldSource.js`))
     : {};
   // Adding keys that have a different value compared to old source
   const similarKeys = Object.keys(source).filter((item) =>
@@ -116,7 +118,7 @@ async function generate() {
   });
 
   // Make a copy of source file for future comparisons
-  await fs.copyFileSync(config.source, './test/oldSource.js');
+  await fs.copyFileSync(config.source, `${config.out}/oldSource.js`);
 }
 
 export { generate };

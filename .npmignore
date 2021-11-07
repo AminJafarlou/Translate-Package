@@ -1,0 +1,10 @@
+
+__tests__/
+test/
+src/
+.prettierrc
+.vscode
+.gitignore
+.npmignore/
+.prettierrc
+tsconfig.json
