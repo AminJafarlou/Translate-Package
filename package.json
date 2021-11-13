@@ -1,10 +1,10 @@
 {
   "name": "translate-package",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A package for translating i18 objects to other languages",
   "main": "index.js",
   "bin": {
-    "generate": "./bin/index.js"
+    "generate-dictionary": "./bin/index.js"
   },
   "keywords": [
     "internationalization",
