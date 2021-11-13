@@ -36,12 +36,12 @@ Here is where Translate-Package comes into play. Translate-package will get an i
 - npm
 
   ```sh
-  npm install translate-package
+  $ npm install translate-package
   ```
 
 - yarn
   ```sh
-  yarn add translate-package
+  $ yarn add translate-package
   ```
 
 ## Usage
@@ -63,7 +63,7 @@ For Example:
 }
 ```
 
-## Second, you have to provide your source file, in the directory mentioned in config file.
+Second, you have to provide your source file, in the directory mentioned in config file.
 
 **NOTE!**
 
@@ -72,6 +72,12 @@ Your source file must have following features:
 - Be an object
 - A JavaScript File
 - Have an acceptable name, for example: (en.js, fr.js, es.js, ...)
+
+Finally, you run below command to generate your files
+
+```sh
+  $ yarn generate-dictionary
+```
 
 ---
 
