@@ -71,6 +71,7 @@ Your source file must have following features:
 
 - Be an object
 - A JavaScript File
+- "module.export" your object in source file
 - Have an acceptable name, for example: (en.js, fr.js, es.js, ...)
 
 Finally, you run below command to generate your files
